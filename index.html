@@ -3,296 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Lost Sheep — 365 Day Catholic Tracker</title>
+    <title>365-Day Catholic Bible Reading Journey</title>
     <style>
         :root {
-            --pasture-green: #dcedc8;
-            --path-green: #9ccc65;
-            --shepherd-blue: #1e88e5;
-            --text-main: #2e7d32;
-            --gold: #ffb300;
+            --bg-kids: #e8f5e9;
+            --primary-kids: #4caf50;
+            --accent-kids: #ffeb3b;
+            --bg-adult: #fcfaf6;
+            --primary-adult: #800020;
+            --accent-adult: #d4af37;
+            --text-dark: #2c3e50;
+            --text-light: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            margin: 0;
-            padding: 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--pasture-green);
-            color: #1b5e20;
-            background-image: radial-gradient(#c5e1a5 20%, transparent 20%);
-            background-size: 30px 30px;
-        }
-
-        .main-wrapper {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 360px;
-            gap: 25px;
-        }
-
-        @media (max-width: 950px) {
-            .main-wrapper { grid-template-columns: 1fr; }
-        }
-
-        .center-trail, .side-devotion {
+            background-color: var(--bg-kids);
+            color: var(--text-dark);
+            transition: var(--transition);
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            width: 100%;
+            min-height: 100vh;
         }
 
-        /* Top Shepherd Banner Card */
-        .shepherd-banner {
-            background: #ffffff;
-            border-radius: 24px;
-            padding: 25px;
+        body.adult-mode {
+            background-color: var(--bg-adult);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-kids), #2e7d32);
+            color: var(--text-light);
+            padding: 20px;
             text-align: center;
-            border: 4px solid var(--path-green);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: var(--transition);
         }
 
-        .banner-icon { font-size: 4.5rem; display: block; margin-bottom: 5px; }
-        .banner-heading { font-weight: 900; font-size: 1.7rem; color: #1b5e20; margin: 0 0 5px 0; }
-        .banner-scripture { font-style: italic; color: #558b2f; margin: 0; font-size: 1.05rem; }
-
-        /* Multi-Profile Track selector bar */
-        .profile-bar {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 12px 20px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border: 1px solid #fff;
-        }
-        .profile-bar select {
-            padding: 6px 12px;
-            border-radius: 8px;
-            border: 2px solid var(--path-green);
-            font-weight: bold;
-            color: #1b5e20;
-            outline: none;
+        body.adult-mode header {
+            background: linear-gradient(135deg, var(--primary-adult), #4a0012);
         }
 
-        /* Solid Hills Path Grid wrapper */
-        .hill-trail-viewport {
-            background: var(--path-green);
-            border-radius: 24px;
-            padding: 20px;
-            border: 4px solid #ffffff;
-            box-shadow: inset 0 4px 12px rgba(0,0,0,0.08);
-            max-height: 480px;
-            overflow-y: auto;
-        }
-
-        /* 10 columns compact path layout tracking matrix layout */
-        .grid-meadow {
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
             display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            gap: 8px;
-            width: 100%;
+            grid-template-columns: 300px 1fr 300px;
+            gap: 20px;
         }
 
-        @media (max-width: 650px) { .grid-meadow { grid-template-columns: repeat(5, 1fr); } }
+        @media (max-width: 992px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
 
-        .sheep-box {
-            background: #ffffff;
-            border-radius: 10px;
-            aspect-ratio: 1;
+        .panel {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 3px solid #e0e0e0;
+        }
+
+        body.adult-mode .panel {
+            border: 1px solid var(--accent-adult);
+            border-radius: 6px;
+        }
+
+        .config-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.5);
+            outline: none;
+            font-size: 14px;
+            color: #000;
+        }
+
+        body.adult-mode input[type="text"] {
+            border-radius: 4px;
+            border: 1px solid var(--accent-adult);
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        body.adult-mode .btn {
+            border-radius: 4px;
+        }
+
+        .btn-mode {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .btn-mode.active {
+            background: var(--accent-kids);
+            color: var(--text-dark);
+        }
+
+        body.adult-mode .btn-mode.active {
+            background: var(--accent-adult);
+            color: white;
+        }
+
+        .btn-lang {
+            background: #f0f0f0;
+            color: var(--text-dark);
+        }
+
+        .btn-lang.active {
+            background: #2196f3;
+            color: white;
+        }
+
+        .btn-action {
+            background-color: var(--primary-kids);
+            color: white;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+        body.adult-mode .btn-action {
+            background-color: var(--primary-adult);
+            border: 1px solid var(--accent-adult);
+        }
+
+        .btn-reset {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* Continuous Visual Journey Path */
+        .map-scroll-container {
+            height: 550px;
+            overflow-y: scroll;
+            background: #c8e6c9;
+            border-radius: 15px;
+            position: relative;
+            border: 4px solid #81c784;
+            padding: 20px;
+        }
+
+        body.adult-mode .map-scroll-container {
+            background: #f5f2eb;
+            border: 1px solid var(--accent-adult);
+            border-radius: 6px;
+        }
+
+        .vertical-path {
             display: flex;
             flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .vertical-path::before {
+            content: '';
+            position: absolute;
+            top: 100px;
+            bottom: 50px;
+            width: 10px;
+            background: #ffd54f;
+            border: 2px solid #ffb300;
+            z-index: 1;
+        }
+
+        body.adult-mode .vertical-path::before {
+            background: #d4af37;
+            border: 1px solid #aa8c2c;
+        }
+
+        /* Peak Destination Style */
+        .destination-peak {
+            text-align: center;
+            background: white;
+            border: 3px solid #ffd54f;
+            border-radius: 12px;
+            padding: 15px;
+            width: 90%;
+            margin-bottom: 30px;
+            z-index: 2;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        body.adult-mode .destination-peak {
+            border: 1px solid var(--accent-adult);
+            background: #fffdf9;
+        }
+
+        .destination-peak h4 {
+            margin-bottom: 5px;
+            color: #e65100;
+        }
+
+        body.adult-mode .destination-peak h4 {
+            color: var(--primary-adult);
+        }
+
+        .peak-artwork {
+            font-size: 40px;
+            margin-top: 5px;
+        }
+
+        /* Path Mileposts */
+        .path-row {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            margin: 25px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .side-object {
+            width: 95px;
+            font-size: 20px;
+            text-align: center;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            padding: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            white-space: nowrap;
+        }
+
+        body.adult-mode .side-object {
+            font-size: 16px;
+            font-style: italic;
+            background: none;
+            box-shadow: none;
+        }
+
+        .map-node {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #757575;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 4px;
-            font-size: 0.65rem;
-            text-align: center;
-            position: relative;
-            border: 1px solid #c5e1a5;
-            min-height: 62px;
-            box-sizing: border-box;
-            transition: all 0.2s ease;
-        }
-
-        .sheep-box.pastured {
-            background: #c8e6c9 !important;
-            border-color: #a5d6a7 !important;
-        }
-
-        .sheep-box.active-seek {
-            border: 2.5px solid var(--shepherd-blue) !important;
-            background: #e3f2fd;
-            transform: scale(1.04);
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .box-title { font-weight: 800; color: #33691e; font-size: 0.7rem; }
-        .box-chapters { color: #424242; font-size: 0.48rem; line-height: 1.1; margin-top: 1px; }
-        
-        .sheep-token {
-            font-size: 1.25rem;
+        .map-node.completed {
+            background: #81c784;
+            border-color: #2e7d32;
+            color: white;
+        }
+
+        .map-node.active-node {
+            box-shadow: 0 0 15px #ffeb3b;
+            border-color: #ff9800;
+            transform: scale(1.15);
+        }
+
+        /* Dynamic Name-Bearing Sheep Token Styling */
+        .token-icon {
             position: absolute;
-            bottom: 2px;
-            animation: bounce 0.5s infinite alternate;
-            z-index: 10;
+            top: -32px;
+            font-size: 18px;
+            animation: bounce 1s infinite alternate;
+            white-space: nowrap;
+            background: #fff;
+            padding: 2px 8px;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            border: 1px solid #ffd54f;
+            color: #333;
+            font-weight: bold;
         }
 
         @keyframes bounce {
             from { transform: translateY(0); }
-            to { transform: translateY(-4px); }
+            to { transform: translateY(-5px); }
         }
 
-        /* Action Buttons Row Configuration layout alignment */
-        .action-row {
+        /* Candle Wall elements */
+        .candle-shelf {
+            background: #d7ccc8;
+            height: 15px;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+
+        .candles-container {
             display: flex;
             gap: 15px;
-            background: rgba(255,255,255,0.9);
-            padding: 15px;
-            border-radius: 16px;
-            border: 2px solid #fff;
             justify-content: center;
-        }
-
-        .tracker-btn {
-            padding: 14px 28px;
-            font-size: 1.05rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-        .tracker-btn:active { transform: scale(0.98); }
-        .btn-seek { background-color: var(--shepherd-blue); color: white; flex: 2; max-width: 280px; box-shadow: 0 4px 12px rgba(30,136,229,0.3); }
-        .btn-seek:hover { background-color: #1565c0; }
-        .btn-restart { background-color: #e53935; color: white; flex: 1; max-width: 120px; }
-
-        /* Devotional Sidebars styles options cards alignment text box fields */
-        .devotional-sidebar {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 24px;
-            padding: 24px;
-            border: 2px solid #fff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            height: fit-content;
-        }
-
-        /* MULTI-LANGUAGE SCRIPTURE WINDOW HUBS */
-        .scripture-hub-card {
-            background: #ffffff;
-            border: 2px solid var(--path-green);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-        }
-        .language-tabs {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 12px;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 5px;
-        }
-        .lang-tab {
-            flex: 1;
-            padding: 6px 4px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            border: none;
-            background: #f5f5f5;
-            color: #666;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-tab.active-lang {
-            background: var(--shepherd-blue);
-            color: white;
-        }
-        .verse-display-text {
-            font-style: italic;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: #2c3e50;
             min-height: 60px;
-            margin: 5px 0 0 0;
+            align-items: flex-end;
         }
 
-        .notes-field {
-            width: 100%;
-            height: 120px;
-            border: 2px solid #c8e6c9;
-            border-radius: 12px;
-            padding: 12px;
-            font-family: inherit;
-            resize: none;
-            box-sizing: border-box;
-            background: #fffdf9;
-            font-size: 0.95rem;
-            outline: none;
+        .candle {
+            width: 20px;
+            height: 40px;
+            background: #fff9c4;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            box-shadow: inset 0 -5px 5px rgba(0,0,0,0.1);
         }
 
-        .verse-banner-footer {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 16px;
-            text-align: center;
-            font-style: italic;
-            border: 2px solid #ffcdd2;
-            color: #33691e;
+        .flame {
+            width: 10px;
+            height: 15px;
+            background: #ff9800;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -15px;
+            left: 5px;
+            animation: flicker 0.1s infinite alternate;
         }
 
-        /* OFFLINE FIXED PARALLAX BALLOON OVERLAY BANNER ASSEMBLY */
-        .victory-screen {
+        @keyframes flicker {
+            0% { transform: scale(1); opacity: 0.9; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* Balloon Elements */
+        .balloon-stage {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            z-index: 20000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            box-sizing: border-box;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
             overflow: hidden;
         }
-        .victory-card {
-            background: white;
-            padding: 40px;
-            border-radius: 32px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.12);
-            border: 5px solid var(--gold);
-            max-width: 500px;
-            text-align: center;
-            z-index: 20002;
-        }
-        .float-balloon-field { position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 20001; }
-        .air-balloon { position: absolute; bottom: -100px; font-size: 3.5rem; animation: liftUp 6s linear infinite; }
-        @keyframes liftUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-120vh) rotate(15deg); opacity: 0; }
+
+        .balloon {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            border-radius: 50%;
+            bottom: -50px;
+            animation: floatUp 4s linear forwards;
         }
 
-        .hill-trail-viewport::-webkit-scrollbar { width: 6px; }
-        .hill-trail-viewport::-webkit-scrollbar-track { background: rgba(0,0,0,0.02); border-radius: 10px; }
-        .hill-trail-viewport::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 10px; }
-    </style>
-</head>
-<body>
+        @keyframes floatUp {
+            0% { bottom: -50px; transform: translateX(0); opacity: 1; }
+            100% { bottom: 105%; transform: translateX(50px); opacity: 0; }
+        }
 
-    <div class="main-wrapper">
-        
-        <!-- HILL MEADOW CENTER COLUMN TRAIL SYSTEM -->
-        <div class="center-trail">
+        .scripture-box {
+            background: #fffde7;
+            padding: 15px;
             
-            <div class="shepherd-banner">
-                <span class="banner-icon">🙌🧔🐑</span>
-                <h1 class="banner-heading">The Lost Sheep Trail</h1>
-                <p class="banner-scripture">"What man among you having a hundred sheep and losing one of them would not leave the ninety-nine in the desert and go after the lost one until he finds it?" — Luke 15:4</p>
-            </div>
-
-            <div class="profile-bar">
-                <strong>👤 Pilgrim Profile:</strong>
-                <select id="profileDropdown" onchange="changeProfileTrack()">
-                    <option value="Profile1">My Devotion Journey</option>
-                    <option value="Profile2">Family Reading Plan</option>
