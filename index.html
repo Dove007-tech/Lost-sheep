@@ -24,10 +24,10 @@
         }
 
         .main-wrapper {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 350px;
+            grid-template-columns: 1fr 360px;
             gap: 25px;
         }
 
@@ -39,6 +39,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            width: 100%;
         }
 
         /* Top Shepherd Banner Card */
@@ -49,7 +50,6 @@
             text-align: center;
             border: 4px solid var(--path-green);
             box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            position: relative;
         }
 
         .banner-icon { font-size: 4.5rem; display: block; margin-bottom: 5px; }
@@ -58,7 +58,7 @@
 
         /* Multi-Profile Track selector bar */
         .profile-bar {
-            background: rgba(255,255,255,0.9);
+            background: rgba(255, 255, 255, 0.9);
             padding: 12px 20px;
             border-radius: 14px;
             display: flex;
@@ -82,7 +82,7 @@
             padding: 20px;
             border: 4px solid #ffffff;
             box-shadow: inset 0 4px 12px rgba(0,0,0,0.08);
-            max-height: 500px;
+            max-height: 480px;
             overflow-y: auto;
         }
 
@@ -91,6 +91,7 @@
             display: grid;
             grid-template-columns: repeat(10, 1fr);
             gap: 8px;
+            width: 100%;
         }
 
         @media (max-width: 650px) { .grid-meadow { grid-template-columns: repeat(5, 1fr); } }
@@ -114,7 +115,7 @@
         }
 
         .sheep-box.pastured {
-            background: #e8f5e9 !important;
+            background: #c8e6c9 !important;
             border-color: #a5d6a7 !important;
         }
 
@@ -127,18 +128,19 @@
         }
 
         .box-title { font-weight: 800; color: #33691e; font-size: 0.7rem; }
-        .box-chapters { color: #555; font-size: 0.48rem; line-height: 1.1; margin-top: 1px; }
+        .box-chapters { color: #424242; font-size: 0.48rem; line-height: 1.1; margin-top: 1px; }
         
         .sheep-token {
             font-size: 1.25rem;
             position: absolute;
             bottom: 2px;
-            animation: bounce 0.4s infinite alternate;
+            animation: bounce 0.5s infinite alternate;
+            z-index: 10;
         }
 
         @keyframes bounce {
             from { transform: translateY(0); }
-            to { transform: translateY(-3px); }
+            to { transform: translateY(-4px); }
         }
 
         /* Action Buttons Row Configuration layout alignment */
@@ -176,33 +178,50 @@
             height: fit-content;
         }
 
-        .bible-portal-box {
-            background: #f1f8e9;
+        /* MULTI-LANGUAGE SCRIPTURE WINDOW HUBS */
+        .scripture-hub-card {
+            background: #ffffff;
             border: 2px solid var(--path-green);
-            border-radius: 14px;
+            border-radius: 16px;
             padding: 16px;
-            text-align: center;
             margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         }
-        
-        .portal-btn {
+        .language-tabs {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: #1565c0;
-            color: white;
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 10px;
+            gap: 5px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+        .lang-tab {
+            flex: 1;
+            padding: 6px 4px;
+            font-size: 0.8rem;
             font-weight: bold;
-            margin-top: 10px;
-            box-shadow: 0 4px 12px rgba(21,101,192,0.25);
+            border: none;
+            background: #f5f5f5;
+            color: #666;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-tab.active-lang {
+            background: var(--shepherd-blue);
+            color: white;
+        }
+        .verse-display-text {
+            font-style: italic;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #2c3e50;
+            min-height: 60px;
+            margin: 5px 0 0 0;
         }
 
         .notes-field {
             width: 100%;
-            height: 140px;
+            height: 120px;
             border: 2px solid #c8e6c9;
             border-radius: 12px;
             padding: 12px;
@@ -272,21 +291,8 @@
                 <p class="banner-scripture">"What man among you having a hundred sheep and losing one of them would not leave the ninety-nine in the desert and go after the lost one until he finds it?" — Luke 15:4</p>
             </div>
 
-            <!-- Profile selector header layout segment line asset -->
             <div class="profile-bar">
                 <strong>👤 Pilgrim Profile:</strong>
                 <select id="profileDropdown" onchange="changeProfileTrack()">
                     <option value="Profile1">My Devotion Journey</option>
                     <option value="Profile2">Family Reading Plan</option>
-                    <option value="Profile3">Parish Study Group</option>
-                </select>
-                <small style="color:#666; font-style:italic;">(Saves progress separately)</small>
-            </div>
-
-            <div class="hill-trail-viewport">
-                <div class="grid-meadow" id="meadowGridNode">
-                    <!-- Loaded dynamically via the standalone script logic down below -->
-                </div>
-            </div>
-
-            <div class="action-row">
