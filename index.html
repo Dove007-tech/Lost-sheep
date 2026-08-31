@@ -9,8 +9,8 @@
             --bg-kids: #e8f5e9;
             --primary-kids: #4caf50;
             --accent-kids: #ffeb3b;
-            --bg-adult: #fcfaf6;
-            --primary-adult: #800020;
+            --bg-adult: #fef9e7; /* Light creamy yellow/golden color background */
+            --primary-adult: #b7950b; /* Golden primary accents */
             --accent-adult: #d4af37;
             --text-dark: #2c3e50;
             --text-light: #ffffff;
@@ -47,7 +47,7 @@
         }
 
         body.adult-mode header {
-            background: linear-gradient(135deg, var(--primary-adult), #4a0012);
+            background: linear-gradient(135deg, #b7950b, #9a7d0a);
         }
 
         .container {
@@ -71,11 +71,13 @@
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             border: 3px solid #e0e0e0;
+            margin-bottom: 20px;
         }
 
         body.adult-mode .panel {
-            border: 1px solid var(--accent-adult);
-            border-radius: 6px;
+            border: 2px solid var(--accent-adult);
+            border-radius: 8px;
+            background: #fffdf4;
         }
 
         .config-row {
@@ -125,7 +127,7 @@
         }
 
         body.adult-mode .btn-mode.active {
-            background: var(--accent-adult);
+            background: #7d6608;
             color: white;
         }
 
@@ -160,7 +162,7 @@
 
         /* Continuous Visual Journey Path */
         .map-scroll-container {
-            height: 550px;
+            height: 500px;
             overflow-y: scroll;
             background: #c8e6c9;
             border-radius: 15px;
@@ -170,9 +172,9 @@
         }
 
         body.adult-mode .map-scroll-container {
-            background: #f5f2eb;
-            border: 1px solid var(--accent-adult);
-            border-radius: 6px;
+            background: #fcf3cf; /* Soft warm golden layout container background */
+            border: 2px solid var(--accent-adult);
+            border-radius: 8px;
         }
 
         .vertical-path {
@@ -244,20 +246,20 @@
 
         .side-object {
             width: 95px;
-            font-size: 20px;
+            font-size: 18px;
             text-align: center;
-            background: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.8);
             border-radius: 8px;
-            padding: 4px;
+            padding: 6px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             white-space: nowrap;
         }
 
         body.adult-mode .side-object {
-            font-size: 16px;
+            font-size: 15px;
             font-style: italic;
-            background: none;
-            box-shadow: none;
+            background: #fff9e6;
+            border: 1px solid #ffe0b2;
         }
 
         .map-node {
@@ -276,6 +278,13 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
+        /* Milestone specialized stop nodes styling */
+        .map-node.milestone-reward-stop {
+            background: #e1bee7;
+            border-color: #8e24aa;
+            border-style: dashed;
+        }
+
         .map-node.completed {
             background: #81c784;
             border-color: #2e7d32;
@@ -288,11 +297,10 @@
             transform: scale(1.15);
         }
 
-        /* Dynamic Name-Bearing Sheep Token Styling */
         .token-icon {
             position: absolute;
             top: -32px;
-            font-size: 18px;
+            font-size: 16px;
             animation: bounce 1s infinite alternate;
             white-space: nowrap;
             background: #fff;
@@ -369,15 +377,6 @@
             height: 40px;
             border-radius: 50%;
             bottom: -50px;
-            animation: floatUp 4s linear forwards;
-        }
+      
 
-        @keyframes floatUp {
-            0% { bottom: -50px; transform: translateX(0); opacity: 1; }
-            100% { bottom: 105%; transform: translateX(50px); opacity: 0; }
-        }
-
-        .scripture-box {
-            background: #fffde7;
-            padding: 15px;
-            
+           
